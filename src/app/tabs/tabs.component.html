@@ -1,0 +1,9 @@
+<div class="slds-tabs_default slds-m-top_medium">
+    <ul class="slds-tabs_default__nav spacing" role="tablist" >
+        <li *ngFor="let tab of tabs" class="slds-tabs_default__item slds-m-right_medium clear-filters" (click)="handleTabNavigation(tab)"
+            [class.slds-is-active]="tab.active" [class.active]="tab.active" role="presentation" #customizable>
+            <a class="slds-tabs_default__link general-font size" [routerLink]=""  role="tab"
+                tabindex="-1" [id]="tab.id">{{tab.name}}</a>
+        </li>
+    </ul>
+</div>

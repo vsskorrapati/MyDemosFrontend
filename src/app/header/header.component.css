@@ -1,0 +1,51 @@
+.icon-color {
+    fill: var(--slds-c-icon-color-foreground, #0176D3);
+}
+
+.div-rectangle {
+    margin-top: 1rem;
+}
+
+.font-color {
+    color: #032d60;
+}
+
+.position {
+    position: relative
+}
+
+.font {
+    font-family: 'ITC Avant Garde';
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.disabled-link {
+    pointer-events: none
+}
+
+.clear-filters {
+    cursor: pointer;
+}
+
+.general-font {
+    font-family: 'Salesforce Sans';
+}
+
+li:hover span.change_to_bold {
+    font-weight: bold;
+
+}
+
+.slds-dropdown__item>a:hover {
+    background: #EAF5FE;
+}
+
+.max-width {
+    width: 15rem
+}
+
+.bolded { font-weight: bold; }

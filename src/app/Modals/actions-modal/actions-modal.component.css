@@ -1,0 +1,118 @@
+.font-color {
+    color: #032d60;
+}
+
+.icon-color {
+    fill: var(--slds-c-icon-color-foreground, #0176D3);
+}
+
+.clear-filters {
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.active {
+    color: #0176D3;
+}
+
+li.slds-tabs_default__item:hover {
+    background: #EAF5FE;
+    color: #032D60;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.font {
+    font-family: 'ITC Avant Garde';
+}
+
+.font-for-org-type {
+    font-family: 'Salesforce Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #032D60;
+}
+
+.margin-adjustment-for-org-type {
+    margin-bottom: 24px;
+}
+
+.img {
+    margin: auto;
+    display: block;
+}
+
+.rcorners {
+    border-radius: 10px;
+    border: 1px solid #D0D0D0;
+    padding: 2px;
+    width: 100px;
+    height: 100px;
+}
+
+.anchor-align {
+    float: left
+}
+
+.general-font {
+    font-family: 'Salesforce Sans';
+}
+
+.slds-button.slds-button_brand:disabled {
+    background-color: #ccc !important;
+    /* replace with the color you want */
+    color: #fff !important;
+    /* replace with the color you want */
+    border-color: #aaa !important;
+    /* replace with the color you want */
+}
+
+.slds-button.slds-button_brand:disabled:hover {
+    background-color: #ccc !important;
+    /* keep this the same as non-hover state */
+    color: #fff !important;
+    /* keep this the same as non-hover state */
+    border-color: #aaa !important;
+    /* keep this the same as non-hover state */
+}
+
+.close-button {
+    margin-right: -19px;
+    margin-top: -7px;
+}
+
+.reset-password-anchor {
+    margin-left: 8px;
+}
+
+.action-icon-adjustments {
+    margin-right: -19px;
+    margin-top: 10px;
+}
+
+.extend-div {
+    margin: 30px;
+}
+
+.textarea_adjustment {
+    margin: 30px
+}
+
+.share-div {
+    margin: 30px;
+}
+
+.word-break_dd {
+    word-break: break-all !important;
+}
+
+.slds-badge-margin-adjustment {
+    margin-left: 0rem !important;
+}

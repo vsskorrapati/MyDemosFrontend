@@ -1,0 +1,16 @@
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.font-color {
+    color: #032d60;
+}
+
+.position {
+    position: relative
+}
+
+.font {
+    font-family: 'ITC Avant Garde';
+}

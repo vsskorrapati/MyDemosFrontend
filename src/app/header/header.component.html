@@ -1,0 +1,48 @@
+<div class="slds-grid slds-gutters">
+    <div class="slds-col">
+        <h1 class="slds-text-heading_large font-color slds-p-left_medium font">My Demos</h1>
+    </div>
+    <div class="slds-col">
+        <app-search (searchEvent)="emitSearchValue($event)"></app-search>
+    </div>
+    <div class="slds-col slds-clearfix" >
+        <div class="slds-float_right slds-p-right_large slds-dropdown-trigger slds-dropdown-trigger_click "  [class.slds-is-open]="is_expanded" >
+            <!-- <button class="slds-button slds-button_icon slds-button_icon-container slds-m-right_medium"  (click)="onNavigate()" (mouseover)="showHelpToolTip=true" (mouseleave)="showHelpToolTip=false" > -->
+                <svg class="slds-button__icon slds-button__icon_large slds-m-right_xx-large icon-color clear-filters" (click)="onNavigate()" (mouseover)="showHelpToolTip=true" (mouseleave)="showHelpToolTip=false">
+                    <use
+                        xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#question_mark">
+                    </use>
+                </svg>
+            <!-- </button> -->
+            <span class="slds-popover slds-popover_tooltip slds-nubbin_top-left" role="tooltip" id="help" style="position:absolute;top:52px;left:-12px" *ngIf="showHelpToolTip"  >
+                <p class="slds-popover__body">Get help</p>
+            </span>
+            <button class="slds-button slds-button_brand btn" (click)="is_expanded=!is_expanded" >
+                Request a demo
+                <svg class="slds-button__icon slds-button__icon--right " aria-hidden="true">
+                    <use *ngIf="!is_expanded"
+                        xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevrondown">
+                    </use>
+                    <use *ngIf="is_expanded"
+                        xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevronup">
+                    </use>
+                </svg>
+            </button>
+
+            <div class="slds-dropdown slds-dropdown_right slds-m-right_large max-width">
+                <ul class="slds-dropdown__list" role="menu" *ngFor="let item of demos">
+                    <li [class.slds-dropdown__item]="!item.isheader"  [class.slds-dropdown__header]="item.isheader" [class.disabled-link]="item.isheader" [class.bolded]="item.isExplore" role="presentation">
+                        <a class="update-key_action" href="javascript:void(0);" role="menuitem" tabindex="0"
+                            (mousedown)="handleRequestDemo(item)">
+                            <span class="slds-truncate general-font change_to_bold">{{item.name}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

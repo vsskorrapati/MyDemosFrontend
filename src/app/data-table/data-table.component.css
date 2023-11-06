@@ -1,0 +1,120 @@
+.table-header {
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+}
+
+li:hover span.change_to_bold{
+  font-weight: bold;
+ 
+}
+
+.slds-dropdown__item>a:hover {
+  background: #EAF5FE;
+}
+
+.font {
+  font-family: 'ITC Avant Garde';
+}
+
+.general-font {
+  font-family: 'Salesforce Sans';
+}
+
+table tr.slds-hint-parent:hover {
+  background-color: #EAF5FE !important;
+  border: solid #014486;
+}
+
+td:first-child,
+th:first-child {
+  border-radius: 10px 0 0 10px;
+}
+
+td:last-child,
+th:last-child {
+  border-radius: 0 10px 10px 0;
+}
+
+.no-demos {
+  border: 1px solid #C9C9C9;
+  border-radius: 10px;
+}
+
+/* Screen Shot 2022-07-29 at 8.33 */
+
+.image-styles {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  border: 1px solid #C9C9C9;
+  border-radius: 4px;
+  /* background-image: url("Screen Shot 2022-07-29 at 8.33.png"); */
+}
+
+.icon-color {
+  fill: var(--slds-c-icon-color-foreground, #0176D3);
+}
+
+.dropdown-icon:hover {
+  fill: var(--slds-c-icon-color-foreground, #0176D3);
+}
+
+.border-color {
+  border: 2px solid #0176D3;
+}
+
+.font-color {
+  color: #032d60;
+}
+
+.blue-font {
+  color: #0176D3;
+}
+
+.blue_font {
+  color: #0176D3; 
+}
+
+.clear-filters {
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.min-height {
+  min-height: 25rem;
+}
+
+.bookmark-color-hover {
+  fill: var(--slds-c-icon-color-foreground, #1B96FF);
+}
+
+.max-width {
+  width: 15rem
+}
+
+.rcorners {
+  border-radius: 5px;
+  border: 1px solid #D0D0D0;
+  padding: 1px; 
+  width: 75px;
+  height: 32px;  
+}
+
+.slds-button.slds-button_brand:disabled {
+  background-color:  #ccc !important; /* replace with the color you want */
+  color: #fff !important; /* replace with the color you want */
+  border-color: #aaa !important; /* replace with the color you want */
+}
+
+.slds-button.slds-button_brand:disabled:hover {
+  background-color: #ccc !important; /* keep this the same as non-hover state */
+  color: #fff !important; /* keep this the same as non-hover state */
+  border-color: #aaa !important; /* keep this the same as non-hover state */
+}

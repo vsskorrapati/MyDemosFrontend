@@ -1,0 +1,8 @@
+/*! Lightning Design System 2.19.0 */
+.slds-dynamic-menu .slds-popover__footer {
+  background-color: transparent;
+}
+.slds-dynamic-menu__header {
+  font-size: 0.875rem;
+  font-weight: 700;
+}

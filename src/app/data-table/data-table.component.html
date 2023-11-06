@@ -1,0 +1,360 @@
+<div class="slds-m-top_medium slds-m-left_xx-large" *ngIf="isSharedTab">
+    <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-show_medium font-color slds-text-heading--medium font"
+        [class.slds-is-open]="shared_type_expaned">{{shared_header_name}}
+        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0"
+            (click)="shared_type_expaned = !shared_type_expaned" *ngIf="!shared_type_expaned">
+            <svg class="slds-button__icon" aria-hidden="true">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevrondown">
+                </use>
+            </svg>
+        </button>
+
+        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0"
+            (click)="shared_type_expaned = !shared_type_expaned" *ngIf="shared_type_expaned">
+            <svg class="slds-button__icon icon-color" aria-hidden="true">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevronup">
+                </use>
+            </svg>
+        </button>
+
+        <div class="slds-dropdown slds-dropdown_right">
+            <ul class="slds-dropdown__list" role="menu" *ngFor="let item of Shared_Types">
+                <li class="slds-dropdown__item" role="presentation">
+                    <a class="update-key_action" href="javascript:void(0);" role="menuitem" tabindex="0"
+                        (mousedown)="handleSharedDropDownClick(item)">
+                        <span class="slds-truncate font">{{item.name}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div [class.slds-m-around_xx-large]="!isSharedTab" [class.slds-m-top_small]="isSharedTab"
+    [class.slds-m-bottom_xx-large]="isSharedTab" [class.slds-m-left_xx-large]="isSharedTab"
+    [class.slds-m-right_xx-large]="isSharedTab" class="min-height">
+    <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_fixed-layout  slds-table_striped"
+        aria-label="Example table of Opportunities with striped rows" style="width: 100%">
+        <colgroup>
+            <col span="1" style="width: 12%;">
+            <col span="1" style="width: 8%;">
+            <col span="1" style="width: 8%;">
+            <col span="1" style="width: 14%;">
+            <col span="1" style="width: 18%;">
+            <col span="1" style="width: 18%;">
+            <col span="1" style="width: 12%;">
+            <col span="1" style="width: 10%;">
+            <col span="1" style="width: 15rem;">
+        </colgroup>
+        <thead>
+            <tr class="slds-line-height_reset font" style="height: 3rem;">
+                <th class="table-header" data-label="Actions" scope="col">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-show_medium "
+                        [class.slds-is-open]="state_is_expanded" [class.blue_font]="is_state_sorted">
+                        {{state_header_name}}
+                        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0" (click)="handleHeader()"
+                            *ngIf="!is_state_sorted && !state_is_expanded">
+                            <svg class="slds-button__icon" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevrondown">
+                                </use>
+                            </svg>
+                        </button>
+
+                        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0"
+                            (click)="state_is_expanded = !state_is_expanded"
+                            *ngIf="!is_state_sorted && state_is_expanded">
+                            <svg class="slds-button__icon" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevronup">
+                                </use>
+                            </svg>
+                        </button>
+
+                        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            *ngIf="is_state_sorted" style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0"
+                            (click)="handleCloseStatus()">
+                            <svg class="slds-button__icon icon-color" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#close">
+                                </use>
+                            </svg>
+                        </button>
+                        <div class="slds-dropdown slds-dropdown_right">
+                            <ul class="slds-dropdown__list" role="menu" *ngFor="let item of status_dropdown">
+                                <li class="slds-dropdown__item" role="presentation">
+                                    <a class="update-key_action" href="javascript:void(0);" role="menuitem" tabindex="0"
+                                        (mousedown)="handleStatusDropdownClick(item)">
+                                        <span class="slds-truncate change_to_bold general-font">{{item.name}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </th>
+                <th class="table-header" data-label="Logo" scope="col">
+                    <div class="slds-truncate">Logo</div>
+                </th>
+                <th class="table-header" data-label="Type" scope="col">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-show_medium "
+                        [class.slds-is-open]="type_is_expanded" [class.blue_font]="is_type_sorted">{{type_header_name}}
+                        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0" (click)="handleType()"
+                            *ngIf="!is_type_sorted && !type_is_expanded">
+                            <svg class="slds-button__icon" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevrondown">
+                                </use>
+                            </svg>
+                        </button>
+
+                        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0"
+                            (click)="type_is_expanded = !type_is_expanded" *ngIf="!is_type_sorted && type_is_expanded">
+                            <svg class="slds-button__icon" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevronup">
+                                </use>
+                            </svg>
+                        </button>
+
+                        <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            *ngIf="is_type_sorted" style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0"
+                            (click)="handleCloseType()">
+                            <svg class="slds-button__icon icon-color" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#close">
+                                </use>
+                            </svg>
+                        </button>
+                        <div class="slds-dropdown slds-dropdown_right max-width">
+                            <ul class="slds-dropdown__list" role="menu" *ngFor="let item of types_dropdown">
+                                <li class="slds-dropdown__item" role="presentation">
+                                    <a class="update-key_action" href="javascript:void(0);" role="menuitem" tabindex="0"
+                                        (mousedown)="handleTypeDropdownClick(item)">
+                                        <span class="slds-truncate change_to_bold general-font">{{item.name}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </th>
+                <th class="table-header" scope="col">
+                    <div class="slds-truncate">Name</div>
+                </th>
+                <th class="table-header" scope="col">
+                    <div class="slds-truncate">Username</div>
+                </th>
+                <th class="table-header" scope="col">
+                    <div class="slds-truncate">Instance</div>
+                </th>
+                <th class="table-header" scope="col">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-show_medium ">Created Date
+                        <!-- <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                        style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0" (click)="handleDateSort()"
+                             *ngIf="is_date_sorted_descending"> -->
+                        <svg class="slds-button__icon slds-button_icon-x-small clear-filters" aria-hidden="true"
+                            (click)="handleDateSort()" style="padding-left: 0.3rem;" *ngIf="is_date_sorted_descending"
+                            (mouseover)="show_sort_tooltip=true" (mouseleave)="show_sort_tooltip=false">
+                            <use
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#arrowdown">
+                            </use>
+                        </svg>
+                        <span class="slds-popover slds-popover_tooltip slds-nubbin_left" role="tooltip" id="help"
+                            style="position:absolute;top:-8px;left:118px"
+                            *ngIf="is_date_sorted_descending && show_sort_tooltip">
+                            <p class="slds-popover__body">Descending</p>
+                        </span>
+                        <!-- </button> -->
+
+                        <!-- <button class="slds-button slds-button_icon slds-button_icon-container slds-button_icon-small"
+                            style="padding-left: 0.3rem;" aria-haspopup="true" tabindex="0" (click)="handleDateSort()"
+                         *ngIf="!is_date_sorted_descending"> -->
+                        <svg class="slds-button__icon slds-button_icon-x-small clear-filters" aria-hidden="true"
+                            *ngIf="!is_date_sorted_descending" (click)="handleDateSort()" style="padding-left: 0.3rem;"
+                            (mouseover)="show_sort_tooltip=true" (mouseleave)="show_sort_tooltip=false">
+                            <use
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#arrowup">
+                            </use>
+                        </svg>
+                        <span class="slds-popover slds-popover_tooltip slds-nubbin_left" role="tooltip" id="help"
+                            style="position:absolute;top:-8px;left:118px"
+                            *ngIf="!is_date_sorted_descending && show_sort_tooltip">
+                            <p class="slds-popover__body">Ascending</p>
+                        </span>
+                        <!-- </button> -->
+
+                    </div>
+                </th>
+                <th class="table-header" scope="col">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-show_medium ">Expiry Date
+                    </div>
+                </th>
+                <th class="table-header" scope="col">
+                    <div class="slds-truncate"><span *ngIf="showClearFilters"
+                            class="blue-font slds-m-left_xx-large clear-filters" (click)="clearFilters()">Clear All
+                            filters <svg class="slds-button__icon" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#close">
+                                </use>
+                            </svg></span></div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="slds-hint-parent general-font clear-filters" style="height: 3rem;" *ngFor="let row of datasource"
+                (click)="onMoreActions(row)" (mouseover)="handleOver(row)" (mouseleave)="handleOut(row)">
+                <td data-label="Status">
+                    <div class="slds-truncate slds-p-left_small">
+                        <span class="slds-icon_container" *ngIf="!row.showbadge">
+                            <svg class="slds-icon slds-icon_x-small"
+                                [class.slds-icon-text-success]="row.state == 'active'"
+                                [class.slds-icon-text-warning]="row.state == 'expiring'"
+                                [class.slds-icon-text-default]="row.state == 'expired'" aria-hidden="true">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#record">
+                                </use>
+                            </svg>
+                        </span>
+                        <span class="slds-badge" [class.slds-theme_success]="row.state == 'active'"
+                            [class.slds-theme_warning]="row.state == 'expiring'"
+                            [class.slds-badge_inverse]="row.state == 'expired'" *ngIf="row.showbadge">{{row.state ==
+                            'active' ? "Active": row.state == 'expiring'? "Expiring": "Expired"}}</span>
+                    </div>
+                </td>
+                <td data-label="Logo">
+                    <div class="slds-truncate">
+                        <div *ngIf="row.logo" class="rcorners">
+                            <img [src]="row.logo" alt="default logo" />
+                        </div>
+                        <img *ngIf="!row.logo && row.type != 'zsc' && row.type!= 'zsmc' && row.type!= 'mcdo' && row.type!='ido' && row.type!='cdo' && row.type!='sdo' && row.type!='edo'"
+                            src="../../assets/images/stockpileIcon.png" width="32px" height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && row.type=='sdo'" src="../../assets/images/sdo.png" width="32px"
+                            height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && row.type=='ido'" src="../../assets/images/ido.png" width="32px"
+                            height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && row.type=='cdo'" src="../../assets/images/cdo.png" width="32px"
+                            height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && row.type=='edo'" src="../../assets/images/edo.png" width="32px"
+                            height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && (row.type == 'zsc' || 'zsmc') && row.account == 'NTO'"
+                            src="../../assets/images/nto.png" width="32px" height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && (row.type == 'zsc' || 'zsmc') && row.account == 'Makana'"
+                            src="../../assets/images/makana.png" width="32px" height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && (row.type == 'zsc' || 'zsmc') && row.account == 'Welo'"
+                            src="../../assets/images/welo.png" width="32px" height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && (row.type == 'zsc' || 'zsmc') && row.account == 'Cumulus'"
+                            src="../../assets/images/cumulus.png" width="32px" height="32px" alt="default logo" />
+                        <img *ngIf="!row.logo && row.type == 'mcdo'" src="../../assets/images/mcdo.png" width="32px"
+                            height="32px" alt="default logo" />
+                    </div>
+                </td>
+                <td data-label="Type">
+                    <div class="slds-truncate">{{((row.type == "zsc" && currentTab == 3) ? "Core" : (row.type == "zsmc"
+                        && currentTab == 3) ? "Marketing" : row.type) | uppercase}}</div>
+                </td>
+                <td data-label="Name">
+                    <div class="slds-truncate">{{row.name}}</div>
+                </td>
+                <td data-label="Username">
+                    <div class="slds-truncate">{{row.username}}</div>
+                </td>
+                <td data-label="Instance">
+                    <div class="slds-truncate">{{row.instance_url}}</div>
+                </td>
+                <td data-label="Created_Date">
+                    <div class="slds-truncate">{{row.created_date | date}}</div>
+                </td>
+                <td data-label="Expiry_Date">
+                    <div class="slds-truncate">{{row.org_expiry | date}}</div>
+                </td>
+                <td data-label="Action">
+                    <button class="slds-button slds-m-around_xx-small btn" appStopPropagation
+                        [class.slds-button_outline-brand]="!row.showbadge" [class.slds-button_brand]="row.showbadge"
+                        (click)="onLogin(row)" [disabled]="row.state == 'expired'">Login</button>
+                    <svg class="slds-button__icon slds-button__icon_large slds-m-left_x-large clear-filters"
+                        (mouseover)="showBookmark(row)" (mouseleave)="hideBookmark(row)"
+                        [class.icon-color]="row.is_bookmarked && !row.showbadge"
+                        [class.bookmark-color-hover]="row.is_bookmarked && row.showbadge"
+                        [class.slds-icon-text-default]="!row.is_bookmarked" appStopPropagation
+                        (click)="bookmarkOrg(row)">
+                        <use
+                            xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#bookmark">
+                        </use>
+                    </svg>
+                    <span class="slds-popover slds-popover_tooltip slds-nubbin_top-left" role="tooltip" id="help"
+                        style="position:absolute;top:52px;left:130px" *ngIf="row.show_bookmark">
+                        <p class="slds-popover__body">Bookmark</p>
+                    </span>
+                    <svg class="slds-button__icon slds-button__icon_large clear-filters slds-icon-text-default slds-m-left_x-large"
+                        (mouseover)="showMoreActions(row)" (mouseleave)="hideMoreActions(row)"
+                        (click)="onMoreActions(row)" appStopPropagation>
+                        <use
+                            xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#threedots_vertical">
+                        </use>
+                    </svg>
+                    <span class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="help"
+                        style="position:absolute;top:-29px;left:185px" *ngIf="row.show_more_actions">
+                        <p class="slds-popover__body">More Actions</p>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="no-demos slds-m-top_x-large" *ngIf="!datasource || datasource.length == 0">
+        <app-no-demos [info]="currentTab"></app-no-demos>
+    </div>
+</div>
+
+<div *ngIf="rowsCount > 9" class="slds-clearfix">
+    <div class="slds-float_left slds-m-left_large general-font">
+        <p> Viewing {{start}} - {{end}} of {{rowsCount}} demos</p>
+    </div>
+    <div class="slds-float_right">
+        <button class="slds-button slds-button_icon slds-button_icon-container btn" [disabled]="activePage == 1"
+            (click)="displayActivePage(1)" [class.blue_font]="!(activePage == 1)">
+            <svg class="slds-button__icon slds-button__icon_large icon-color ">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#left">
+                </use>
+            </svg> First
+        </button>
+        <button class="slds-button slds-button_icon slds-button_icon-container btn" [disabled]="activePage == 1"
+            (click)="displayActivePage(activePage - 1)">
+            <svg class="slds-button__icon slds-button__icon_large icon-color ">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevronleft">
+                </use>
+            </svg>
+        </button>
+        <button class="slds-button btn" [ngClass]="{'slds-button_outline-brand': activePage == item}"
+            (click)="displayActivePage(item)" *ngFor="let item of pages">{{item}}</button>
+        <button class="slds-button slds-button_icon slds-button_icon-container btn"
+            (click)="displayActivePage(activePage + 1)" [disabled]="activePage == pageCount">
+            <svg class="slds-button__icon slds-button__icon_large icon-color ">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#chevronright">
+                </use>
+            </svg>
+        </button>
+        <button class="slds-button slds-button_icon slds-button_icon-container btn"
+            (click)="displayActivePage(pageCount)" [disabled]="activePage == pageCount"
+            [class.blue_font]="!(activePage == pageCount)">Last
+            <svg class="slds-button__icon slds-button__icon_large icon-color ">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#right">
+                </use>
+            </svg>
+        </button>
+    </div>
+</div>

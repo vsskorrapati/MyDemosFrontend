@@ -1,0 +1,14 @@
+.opacity {
+    --sds-c-backdrop-color-background:rgba(8,7,7,.2);
+}
+
+.right-body {
+    position: sticky;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.app {
+    position: relative;
+    overflow: auto;
+}

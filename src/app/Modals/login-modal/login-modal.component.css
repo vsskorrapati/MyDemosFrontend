@@ -1,0 +1,26 @@
+.font-color {
+    color: #032d60;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.slds-button.slds-button_brand:disabled {
+    background-color: #ccc !important;
+    /* replace with the color you want */
+    color: #fff !important;
+    /* replace with the color you want */
+    border-color: #aaa !important;
+    /* replace with the color you want */
+}
+
+.slds-button.slds-button_brand:disabled:hover {
+    background-color: #ccc !important;
+    /* keep this the same as non-hover state */
+    color: #fff !important;
+    /* keep this the same as non-hover state */
+    border-color: #aaa !important;
+    /* keep this the same as non-hover state */
+}

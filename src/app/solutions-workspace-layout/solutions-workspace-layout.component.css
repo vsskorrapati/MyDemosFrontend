@@ -1,0 +1,131 @@
+.left-sidebar {
+    align-items: center;
+    background: #032D60;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    width: 59px;
+    height: 100%;
+    padding-top: 84px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.left-sidebar .icon-group .nav-icon {
+    position: relative;
+    width: 44px;
+    height: 44px;
+}
+
+.left-sidebar .icon-group .active-tab:hover::before,
+.left-sidebar .icon-group .active-tab:hover::after {
+    background: #014486;
+}
+
+.left-sidebar .icon-group .nav-icon:hover::before {
+    top: -5px;
+}
+
+.left-sidebar .icon-group .nav-icon:hover::after {
+    bottom: -5px;
+}
+
+.left-sidebar .icon-group .nav-icon .tooltip {
+    display: none;
+}
+
+.left-sidebar .icon-group .nav-icon:hover .tooltip {
+    display: inherit;
+    background: #032E61;
+    position: absolute;
+    top: 6px;
+    left: 70px;
+}
+
+.left-sidebar .icon-group a {
+    padding: 10px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-sidebar .icon-group a:hover {
+    padding: 10px 12px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.left-sidebar .icon-group a:hover svg {
+    opacity: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.left-sidebar .icon-group .active-tab a {
+    background-color: #0176d3;
+    border-color: #0176d3;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-sidebar .icon-group .active-tab a svg {
+    opacity: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.left-sidebar .icon-group .active-tab::before {
+    top: -5px;
+}
+
+.left-sidebar .icon-group .active-tab::after {
+    bottom: -5px;
+}
+
+.left-sidebar .icon-group svg {
+    opacity: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.left-sidebar .icon-group .help-icon {
+    position: absolute;
+    bottom: 0;
+}
+
+.search-alert {
+    background: #e5f0f9;
+}
+
+.search-alert h2 {
+    color: #344a5f;
+}
+
+.search-alert svg {
+    fill: #344a5f;
+}
+
+
+.main-content {
+    margin-left: 5rem;
+}
+
+.color-for-demos-icon {
+    background-color: var(--slds-g-color-palette-blue-50);
+    border-color: var(--slds-g-color-palette-blue-50);
+}
+
+.cNav {
+    border-bottom: 0;
+}
+
+.cNav li {
+    margin-right: 0.5rem;
+}

@@ -1,0 +1,61 @@
+<section role="dialog" tabindex="-1" aria-modal="true" aria-label="Meaningful description of the modal content"
+    class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+        <div class="slds-modal__content slds-p-around_medium slds-modal__content_headless" id="modal-content-id-1">
+            <div>
+                <h1 class="slds-text-heading--medium font-color slds-p-left_medium">Login</h1>
+            </div>
+            <div class="slds-m-left_medium slds-m-top_medium">
+                We use your org credentials to authenticate. Enter your password to proceed
+            </div>
+
+
+            <div class="slds-form-element slds-m-top_x-large">
+                <div class="slds-form-element slds-form-element_stacked">
+                    <label class="slds-form-element__label" for="Username">
+                        <abbr class="slds-required" title="required">* </abbr>Username
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="Username" class="slds-input" #shareTo [(ngModel)]="username"
+                            [value]="username" placeholder="Enter Username" [disabled]="username && username.length > 0"
+                            required>
+                    </div>
+                </div>
+                <br>
+                <div class="slds-form-element slds-form-element_stacked">
+                    <label class="slds-form-element__label" for="password-input">
+                        <abbr class="slds-required" title="required">* </abbr>Password
+                    </label>
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                        <input [attr.type]="showPassword ? 'text' : 'password'" id="password-input" [value]="password"
+                            class="slds-input" [(ngModel)]="password" #passwordInput="ngModel" name="password"
+                            [disabled]="disable" placeholder="Type password">
+                        <button
+                            class="slds-button slds-button_icon slds-input__icon slds-input__icon_right btn"
+                            (click)="showHidePassword();">
+                            <svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default" aria-hidden="true"
+                                *ngIf="!showPassword">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#preview" />
+                            </svg>
+                            <svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default" aria-hidden="true"
+                                *ngIf="showPassword">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#hide" />
+                            </svg>
+                            <span class="slds-assistive-text">View Password</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-modal__footer ">
+            <button class="slds-button slds-button_neutral btn" aria-label="Cancel and close"
+                (click)="onClose()">Cancel</button>
+            <button class="slds-button slds-button_brand btn" (click)="onLogin()"
+                [disabled]="!password || (password && password.length == 0)">Login</button>
+        </div>
+    </div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>

@@ -1,0 +1,16 @@
+<app-solutions-workspace-layout></app-solutions-workspace-layout>
+
+<div class="slds-m-left_xx-large right-body">
+    <div class="slds-m-around_large">
+        <app-header></app-header>
+        <notification></notification>
+        <app-tabs></app-tabs>
+        <app-data-table (moreActions)="handleMoreActions($event)" (login)="handleLogin($event)"></app-data-table>
+    </div>
+    <app-actions-modal *ngIf="openActionsModal" (closeActionsModal)="handleClose($event)" [org]="orgData">
+    </app-actions-modal>
+    <app-login-modal *ngIf="openLoginModal" (closeLoginModal)="handleLoginClose($event)" [org]="orgData">
+    </app-login-modal>
+    <div class="slds-backdrop opacity" [class.slds-backdrop_open]="openActionsModal || openLoginModal"></div>
+
+</div>

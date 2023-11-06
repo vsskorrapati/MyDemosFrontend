@@ -1,0 +1,41 @@
+.cNav {
+    border-bottom: 0;
+}
+
+.cNav li {
+    margin-right: 0.5rem;
+}
+
+.font {
+    font-family: 'ITC Avant Garde';
+}
+
+.spacing {
+    --slds-c-tabs-item-spacing-inline-end: 1.5rem;
+    --slds-c-tabs-item-spacing-inline-start: 1.5rem;
+}
+
+
+.general-font {
+    font-family: 'Salesforce Sans';
+  }
+
+.active {
+    color: #0176D3;
+}
+
+.size {
+    font-size: 0.95rem;
+}
+
+li.slds-tabs_default__item:hover {
+    background: #EAF5FE;
+    color: #032D60;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.clear-filters {
+    cursor: pointer;
+  }

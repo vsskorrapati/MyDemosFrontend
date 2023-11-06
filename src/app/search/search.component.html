@@ -1,0 +1,19 @@
+<div class="slds-p-bottom_medium slds-p-left_xx-large">
+    <div class="slds-form-element">
+        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right">
+            <svg class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default" aria-hidden="true">
+                <use
+                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#search" />
+            </svg>
+            <input #input type="text" id="search-input" class="slds-input" placeholder="Search my demos"
+                (keyup)="search(input.value, input)" (blur)="onBlur(input.value)" />
+            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right btn" title="Clear"
+                *ngIf="showClearIcon" (click)="clearSearch()">
+                <svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"
+                    aria-hidden="true">
+                    <use
+                        xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#clear" />
+                </svg></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,408 @@
+<section role="dialog" tabindex="-1" aria-modal="true" aria-label="Meaningful description of the modal content"
+    *ngIf="!open_reset_modal" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+        <div class="slds-modal__content slds-p-around_medium slds-modal__content_headless" id="modal-content-id-1">
+            <div class="slds-clearfix">
+                <div class="slds-float_left"><span
+                        class="slds-text-heading--medium font-color slds-p-left_medium font">{{orgData.name}}</span>
+                </div>
+                <div class="slds-float_right close-button">
+                    <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default slds-m-right_x-large slds-m-top_small clear-filters"
+                        (click)="onClose()">
+                        <use
+                            xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#close">
+                        </use>
+                    </svg>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters margin-adjustment-for-org-type">
+                <div class="slds-col slds-text-heading_small slds-m-left_medium slds-m-top_x-small font-for-org-type"
+                    *ngIf="orgData.key_name">
+                    {{orgData.key_name}}
+                </div>
+                <div class="slds-col slds-text-heading_small slds-m-left_medium slds-m-top_x-small font-for-org-type"
+                    *ngIf="!orgData.key_name">
+                    {{orgData.type | uppercase}}
+                </div>
+                <div class="slds-col slds-clearfix action-icon-adjustments">
+                    <div class="slds-float_right">
+                        <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default clear-filters slds-m-right_x-large"
+                            *ngIf="this.orgData.type != 'zsc' && this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && this.orgData.type != 'edo' && (this.orgData.state != 'expired' || expired_in_last_30_days) && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend'"
+                            (click)="onRefreshOrg()">
+                            <use
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#refresh">
+                            </use>
+                        </svg>
+
+                        <!-- <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default clear-filters slds-m-right_x-large"
+                            *ngIf="this.orgData.type != 'zsc' && this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && this.orgData.type != 'edo' && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend'"
+                            (click)="show_pwd_field = !show_pwd_field;updatePassword()">
+                            <use *ngIf="!show_pwd_field"
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#edit">
+                            </use>
+                            <use *ngIf="show_pwd_field"
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#save">
+                            </use>
+                        </svg> -->
+                        <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default slds-m-right_x-large clear-filters"
+                            *ngIf="this.orgData.type != 'zsc' && this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && this.orgData.type != 'edo' && this.orgData.state != 'expired' && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend'"
+                            (click)="onDelete()">
+                            <use
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#delete">
+                            </use>
+                        </svg>
+                        <svg class="slds-button__icon slds-button__icon_medium slds-m-right_x-large clear-filters"
+                            (click)="onBookmark()" [class.icon-color]="orgData.is_bookmarked"
+                            [class.slds-icon-text-default]="!orgData.is_bookmarked"
+                            [class.icon-color]="orgData.is_bookmarked">
+                            <use
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#bookmark">
+                            </use>
+                        </svg>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="slds-tabs_default slds-m-top_large slds-m-bottom_xx-large">
+                <ul class="slds-tabs_default__nav " role="tablist">
+                    <li *ngFor="let tab of tabs" class="slds-tabs_default__item slds-m-right_medium clear-filters"
+                        [class.active]="tab.active" [class.slds-is-active]="tab.active" [title]="tab.name"
+                        (click)="handleTabChange(tab)" role="presentation" #customizable>
+                        <a class="slds-tabs_default__link" [routerLink]="" role="tab" tabindex="-1"
+                            [id]="tab.id">{{tab.name}}{{tab.name == 'Share' ? (shared_count > 0 ? (' '+'(0' +
+                            shared_count + ')'): '') : ''}}</a>
+                    </li>
+                </ul>
+
+                <div class="slds-grid slds-gutters slds-m-top_large" *ngIf="currentTab == 'Overview'">
+                    <div class="slds-col slds-size_1-of-3 slds-align_absolute-center" *ngIf="!image_loading">
+                        <div *ngIf="orgData.logo" class="rcorners slds-align_absolute-center">
+                            <img [src]="orgData.logo" alt="logo" logo />
+                        </div>
+                        <img *ngIf="!orgData.logo && orgData.type == 'misc'" width="100px" height="100px"
+                            src="../../assets/images/logo_large.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && orgData.type == 'sdo'" width="100px" height="100px"
+                            src="../../assets/images/sdo.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && orgData.type == 'ido'" width="100px" height="100px"
+                            src="../../assets/images/ido.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && orgData.type == 'cdo'" width="100px" height="100px"
+                            src="../../assets/images/cdo.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && orgData.type == 'edo'" width="100px" height="100px"
+                            src="../../assets/images/edo.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && orgData.type == 'mcdo'" width="100px" height="100px"
+                            src="../../assets/images/mcdo.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && (orgData.type == 'zsc' || 'zsmc') && orgData.account == 'NTO'"
+                            width="100px" height="100px" src="../../assets/images/nto.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && (orgData.type == 'zsc' || 'zsmc') && orgData.account == 'Makana'"
+                            width="100px" height="100px" src="../../assets/images/makana.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && (orgData.type == 'zsc' || 'zsmc') && orgData.account == 'Cumulus'"
+                            width="100px" height="100px" src="../../assets/images/cumulus.png" alt="logo" logo />
+                        <img *ngIf="!orgData.logo && (orgData.type == 'zsc' || 'zsmc') && orgData.account == 'Welo'"
+                            width="100px" height="100px" src="../../assets/images/welo.png" alt="logo" logo />
+                        <input style="display: none" type="file" accept=".jpg, .jpeg, .png"
+                            (change)="onFileChanged($event)" #fileInput>
+                        <svg *ngIf="this.orgData.type != 'zsc' && this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && this.orgData.type != 'edo'"
+                            class="slds-button__icon slds-button__icon_medium slds-m-right_x-large clear-filters slds-icon-text-default"
+                            style="margin-top: 100px;" aria-hidden="true" (click)="fileInput.click()">
+                            <use
+                                xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#photo">
+                            </use>
+                        </svg>
+                    </div>
+                    <div class="slds-col slds-align_absolute-center" *ngIf="image_loading">
+                        <div class="slds-media__figure slds-is-relative" style="margin-left: 2rem;">
+                            <div role="status" class="slds-spinner slds-spinner_brand slds-spinner_medium">
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-align_absolute-center">
+
+                        <div class="slds-media__figure slds-is-relative" style="margin-left: -10rem;" *ngIf="loading">
+                            <div role="status" class="slds-spinner slds-spinner_brand slds-spinner_medium">
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                        <div *ngIf="!loading">
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium">Username:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium">
+                                    {{orgData?.username}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium">Instance:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium">
+                                    {{orgData?.instance_url}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.sfdc_id">Org Id:
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.sfdc_id">
+                                    {{orgData.sfdc_id}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.instance_name">
+                                    Instance Name:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.instance_name">
+                                    {{orgData.instance_name}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.mid">Org ID:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.mid">
+                                    {{orgData.mid}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.trailforce_id">
+                                    Trailforce Id:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.trailforce_id">
+                                    {{orgData.trailforce_id}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.org_type">Org
+                                    Type:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.org_type">
+                                    {{orgData.org_type}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.org_exp_type">Org
+                                    Status:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.org_exp_type">
+                                    {{orgData.org_exp_type}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.org_edition">
+                                    Edition:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.org_edition">
+                                    {{orgData.org_edition}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.org_expiry">
+                                    Validity:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.org_expiry">
+                                    {{orgData.created_date | date}} to {{orgData.org_expiry | date}}</dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium"
+                                    *ngIf="orgData.is_owner == true && orgData.type != 'zsmc' && orgData.type != 'mcdo'">
+                                    Password:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.is_owner == true && orgData.type != 'zsmc' && orgData.type != 'mcdo'">
+                                    <input *ngIf="show_pwd_field" id="password-input" [value]="password"
+                                        class="slds-m-left_medium" class="slds-input" [(ngModel)]="password"
+                                        appAutoFocus [disabled]="disable_pwd_field" #passwordInput="ngModel"
+                                        name="password" placeholder="Type password" style="width:50%; min-height:30px">
+                                    <span *ngIf="!show_pwd_field">
+                                        {{(orgData.pwd &&
+                                        orgData.pwd.trim()!='')
+                                        ? '**************' : 'No password saved'}}</span>
+                                    <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default clear-filters slds-m-right_x-large slds-m-left_medium"
+                                        *ngIf="this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend' && !show_pwd_field"
+                                        (click)="show_pwd_field = !show_pwd_field;this.disableLogin=!this.disableLogin">
+                                        <use
+                                            xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#edit">
+                                        </use>
+                                    </svg>
+                                    <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default clear-filters slds-m-right_x-large slds-m-left_medium"
+                                        *ngIf="this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend' && show_pwd_field"
+                                        (click)="updatePassword()">
+                                        <use
+                                            xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#save">
+                                        </use>
+                                    </svg>
+                                </dd>
+                                <dt class="slds-dl_horizontal__label slds-p-top_medium" *ngIf="orgData.tags.length > 0">
+                                    Tags:</dt>
+                                <dd class="slds-dl_horizontal__detail word-break_dd slds-p-top_medium"
+                                    *ngIf="orgData.tags.length > 0">
+                                    <span class="slds-badge slds-m-bottom_x-small slds-m-right_x-small slds-badge-margin-adjustment"
+                                        *ngFor="let tag of orgData.tags">{{tag.tag}}</span>
+                            </dl>
+                            <!-- <p *ngIf="orgData.is_owner == true && orgData.type != 'zsmc' && orgData.type != 'mcdo'"
+                                class="slds-p-top_medium">Password:
+                                <input *ngIf="show_pwd_field" id="password-input" [value]="password"
+                                    class="slds-m-left_medium" class="slds-input" [(ngModel)]="password" appAutoFocus
+                                    [disabled]="disable_pwd_field" #passwordInput="ngModel" name="password"
+                                    placeholder="Type password" style="width:50%; min-height:30px; margin-left: 1rem">
+                                <span *ngIf="!show_pwd_field">
+                                    &nbsp;&nbsp;&nbsp;{{(orgData.pwd &&
+                                    orgData.pwd.trim()!='')
+                                    ? '**************' : 'No password saved'}}</span>
+                                <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default clear-filters slds-m-right_x-large slds-m-left_medium"
+                                    *ngIf="this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend' && !show_pwd_field"
+                                    (click)="show_pwd_field = !show_pwd_field;this.disableLogin=!this.disableLogin">
+                                    <use
+                                        xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#edit">
+                                    </use>
+                                </svg>
+                                <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default clear-filters slds-m-right_x-large slds-m-left_medium"
+                                    *ngIf="this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && currentTab != 'Share' && currentTab != 'Notes' && currentTab != 'Extend' && show_pwd_field"
+                                    (click)="updatePassword()">
+                                    <use
+                                        xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#save">
+                                    </use>
+                                </svg>
+                            </p> -->
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="slds-form-element slds-m-top_large" *ngIf="currentTab == 'Notes'">
+                    <div class="slds-form-element__control textarea_adjustment">
+                        <textarea id="textarea-id-01" placeholder="Type your note here" class="slds-textarea"
+                            [value]="orgData.notes[0]?.note" [(ngModel)]="notes"
+                            style="height: 10rem">{{orgData.notes[0]?.note}}</textarea>
+                    </div>
+                </div>
+
+                <div class="slds-form-element slds-m-top_x-large extend-div" *ngIf="currentTab == 'Extend'">
+                    <label class="slds-form-element__label" for="slider-id-01">
+                        <span class="slds-slider-label">
+                            <p class="slds-slider-label__label">How long do you want to extend this org for? For
+                                technical reasons we can only extend your demo from
+                                today.(Slide from 1 - 365 days)</p>
+                        </span>
+                    </label>
+                    <div class="slds-form-element__control slds-m-top_large">
+                        <div class="slds-slider slds-m-top_xx-large">
+                            <input type="range" id="slider-id-01" class="slds-slider__range" name="extend" min="1"
+                                max="365" [value]="daysToExtend" [(ngModel)]="daysToExtend" />
+                        </div>
+
+                        <div class="slds-m-top_xx-large" style="position: relative;">
+                            <p><strong>{{daysToExtend}} day(s) from today. </strong>This org will expire on
+                                <strong>{{updateOrgExpiryDate() | date}}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element slds-m-top_x-large share-div" *ngIf="currentTab == 'Share'">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="shareTo">
+                            <abbr class="slds-required" title="required">* </abbr>Share to
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input type="text" id="shareTo" class="slds-input" #shareTo [(ngModel)]="email"
+                                [value]="email" placeholder="Enter Email" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="message">
+                            Message
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input type="text" id="message" class="slds-input" #message [(ngModel)]="messageContent"
+                                [value]="messageContent" placeholder="Send a message...">
+                        </div>
+                    </div>
+                    <div class="slds-m-top_large" *ngIf="shared_count > 0">
+                        <p><strong>Shared with:</strong></p>
+                        <p class="slds-m-top_medium" *ngFor="let email of shared_emails">{{email}}</p>
+                    </div>
+                </div>
+
+                <div class="slds-form-element slds-m-top_x-large" *ngIf="currentTab == 'Password Reset'">
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="reset_username">
+                            <abbr class="slds-required" title="required">* </abbr>Username
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input type="text" id="reset_username" class="slds-input" #resetUsername
+                                [(ngModel)]="reset_username" [value]="reset_username" placeholder="Enter Username"
+                                required [disabled]="reset_username">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="slds-form-element slds-form-element_stacked">
+                        <label class="slds-form-element__label" for="reset_password">
+                            Password
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input type="text" id="reset_password" class="slds-input" #resetPassword
+                                [(ngModel)]="reset_password" [value]="reset_password" placeholder="Enter Password"
+                                required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-modal__footer">
+            <a class="slds-m-top_small general-font anchor-align slds-text-heading--small reset-password-anchor"
+                [routerLink]="" (click)="open_reset_modal=true"
+                *ngIf="this.orgData.type != 'zsc' && this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc' && this.orgData.type != 'edo' && this.orgData.is_owner != false && orgData.state != 'expired'">Reset
+                Password</a>
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                (click)="onClose()">Cancel</button>
+            <button class="slds-button slds-button_brand btn" (click)="onSave()" [disabled]="saving"
+                [disabled]="(noPwd || (orgData.state == 'expired') || this.disableLogin || (currentTab == 'Password Reset' && !reset_password)) && currentTab == 'Overview' && (this.orgData.type != 'mcdo' && this.orgData.type != 'zsmc')">{{buttonData
+                ==
+                'Saving' ?
+                'Saving': buttonData == 'Saved'? 'Saved': buttonData == 'Saving Note' ?
+                'Saving Note': buttonData == 'Note Saved'? 'Note Saved': buttonData == 'Extending' ?
+                'Extending': buttonData == 'Extended'? 'Extended': buttonData == 'Sharing' ?
+                'Sharing': buttonData == 'Shared'? 'Shared':buttonContent}}</button>
+        </div>
+    </div>
+</section>
+
+<section role="dialog" tabindex="-1" aria-modal="true" aria-label="Meaningful description of the modal content"
+    *ngIf="open_reset_modal" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+        <div class="slds-modal__content slds-p-around_medium slds-modal__content_headless" id="modal-content-id-1">
+            <div class="slds-clearfix">
+                <div class="slds-float_left"><span
+                        class="slds-text-heading--medium font-color slds-p-left_medium font">Reset Password</span>
+                </div>
+                <div class="slds-float_right">
+                    <svg class="slds-button__icon slds-button__icon_medium slds-icon-text-default slds-m-right_x-large slds-m-top_small clear-filters"
+                        (click)="onClose()">
+                        <use
+                            xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#close">
+                        </use>
+                    </svg>
+                </div>
+
+            </div>
+            <div class="slds-form-element slds-m-top_x-large" style="margin-top: 5rem; margin-bottom: 5rem">
+                <div class="slds-form-element slds-form-element_stacked">
+                    <label class="slds-form-element__label" for="reset_username">
+                        <abbr class="slds-required" title="required">* </abbr>Username
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="reset_username" class="slds-input" #resetUsername
+                            [(ngModel)]="reset_username" [value]="reset_username" placeholder="Enter Username" required
+                            [disabled]="reset_username">
+                    </div>
+                </div>
+                <br>
+                <div class="slds-form-element slds-form-element_stacked">
+                    <label class="slds-form-element__label" for="reset_password">
+                        Password
+                    </label>
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                        <input [attr.type]="showPassword ? 'text' : 'password'" id="reset_password"
+                            [value]="reset_password" class="slds-input" [(ngModel)]="reset_password" #resetPassword
+                            name="password" [disabled]="resetting_state" placeholder="Type password">
+                        <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right btn"
+                            (click)="showHidePassword();">
+                            <svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"
+                                aria-hidden="true" *ngIf="!showPassword">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#preview" />
+                            </svg>
+                            <svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"
+                                aria-hidden="true" *ngIf="showPassword">
+                                <use
+                                    xlink:href="/assets/libs/salesforce-lightning-design-system-2.19.0/assets/icons/utility-sprite/svg/symbols.svg#hide" />
+                            </svg>
+                            <span class="slds-assistive-text">View Password</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                (click)="open_reset_modal=false">Back</button>
+            <button class="slds-button slds-button_brand btn" (click)="onReset()"
+                [disabled]="resetting_state">{{resetting_state == true ? 'Resetting' : 'Reset'}}</button>
+        </div>
+    </div>
+</section>
+<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
